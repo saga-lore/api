@@ -10,11 +10,10 @@ class Logger {
         return [hour, minute];
     }
 
-    getInfo(status, message, controller){
+    getInfo(message, controller){
         const [hour, minute] = this.getCurrTimestamp();
         const information = [
             {
-                Status: status,
                 Message: message,
                 Hour: hour,
                 Minute: minute,
