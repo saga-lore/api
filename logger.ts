@@ -45,9 +45,9 @@ class Logger {
     transformation(array: Info[]): any[] {
         const transformed = array.reduce((acc: any, { namespace, message, date }, index) => {
             acc[index + 1] = {
-              date: colors.yellow(date),
               namespace: namespace === "error" ? colors.red(namespace) : colors.cyan(namespace),
               message: colors.green(message),
+              date: colors.yellow(date),
             }; return acc
           }, {})
 
