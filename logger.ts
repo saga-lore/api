@@ -41,13 +41,17 @@ class Logger {
             console.table(transformedFErrors);
             }, 1000);
     }
-    // Transformation function
+    // Transformation function (transform form logs or errors to object that containe index)
     transformation(array: Info[]): any[] {
-    return array.map(({ namespace, message, date }) => ({
-        date: colors.yellow(date),
-        message: colors.green(message),
-        namespace: namespace === "error" ? colors.red(namespace) : colors.cyan(namespace),
-    }));
+        const transformed = array.reduce((acc: any, { namespace, message, date }, index) => {
+            acc[index + 1] = {
+              date: colors.yellow(date),
+              namespace: namespace === "error" ? colors.red(namespace) : colors.cyan(namespace),
+              message: colors.green(message),
+            }; return acc
+          }, {})
+
+        return transformed;
     }   
 
     // The Omit<Type, Keys> utility type in TypeScript creates a new type by excluding specific properties (Keys) from an existing type (Type).
@@ -68,6 +72,5 @@ const logger = new Logger();
 logger.log({ message: "This is programming", namespace: "log" });
 logger.log({ message: "This is gramming", namespace: "log" });
 logger.log({ message: "This is progrng", namespace: "log" });
-
 logger.error({ message: "the name of the function is not correct", namespace: "error" });
 
