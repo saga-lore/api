@@ -22,7 +22,7 @@ setInterval(() => {
   const transformed = logs.reduce((acc: any, { namespace, message, date }, index) => {
     acc[index + 1] = {
       date: colors.yellow(date),
-      namespace: namespace === "error" ? colors.red(message) : colors.cyan(namespace),
+      namespace: namespace === "error" ? colors.red(namespace) : colors.cyan(namespace),
       message: colors.green(message),
     }; return acc
   }, {})
